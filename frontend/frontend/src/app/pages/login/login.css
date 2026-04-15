@@ -1,0 +1,19 @@
+input {
+  padding: 8px;
+  width: 220px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+button {
+  padding: 8px 16px;
+  border: none;
+  background: #1976d2;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #125ca1;
+}

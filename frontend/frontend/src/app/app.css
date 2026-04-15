@@ -1,0 +1,10 @@
+nav {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
