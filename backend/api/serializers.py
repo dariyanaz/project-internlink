@@ -85,6 +85,7 @@ class InternshipSerializer(serializers.ModelSerializer):
 class ApplicationSerializer(serializers.ModelSerializer):
     student = serializers.CharField(source='student.username', read_only=True)
     internship_title = serializers.CharField(source='internship.title', read_only=True)
+    company = serializers.CharField(source='internship.company.name', read_only=True)
 
     class Meta:
         model = Application
@@ -92,6 +93,7 @@ class ApplicationSerializer(serializers.ModelSerializer):
             'id',
             'internship',
             'internship_title',
+            'company',
             'student',
             'cover_letter',
             'status',

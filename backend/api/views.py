@@ -113,7 +113,9 @@ class ApplicationListCreateView(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        return Application.objects.select_related('internship', 'student').filter(student=self.request.user)
+        return Application.objects.select_related('internship', 'internship__company', 'student').filter(
+            student=self.request.user
+        ).order_by('-applied_at')
 
     def get_serializer_context(self):
         return {'request': self.request}
@@ -124,7 +126,9 @@ class ApplicationDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        return Application.objects.select_related('internship', 'student').filter(student=self.request.user)
+        return Application.objects.select_related('internship', 'internship__company', 'student').filter(
+            student=self.request.user
+        )
 
     def get_serializer_context(self):
         return {'request': self.request}
@@ -140,7 +144,9 @@ class ReviewListCreateView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         internship_id = self.kwargs.get('internship_id')
-        return Review.objects.select_related('internship', 'student').filter(internship_id=internship_id)
+        return Review.objects.select_related('internship', 'student').filter(
+            internship_id=internship_id
+        ).order_by('-created_at')
 
     def get_serializer_context(self):
         return {'request': self.request}
