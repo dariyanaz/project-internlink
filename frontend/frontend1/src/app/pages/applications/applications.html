@@ -1,0 +1,44 @@
+<app-navbar></app-navbar>
+
+<section class="applications-page">
+  <div class="page-header">
+    <h1>My Applications</h1>
+    <p>Track all internships you have applied for.</p>
+  </div>
+
+  <div *ngIf="loading" class="state-card">Loading applications...</div>
+  <div *ngIf="error" class="state-card error">{{ error }}</div>
+
+  <div *ngIf="!loading && !error && applications.length === 0" class="state-card">
+    You have not applied to any internships yet.
+  </div>
+
+  <div class="applications-grid" *ngIf="!loading && !error && applications.length > 0">
+    <div class="application-card" *ngFor="let app of applications">
+      <div class="card-header">
+        <div>
+          <h3>{{ app.internship_title || 'Internship' }}</h3>
+          <p>{{ app.company || 'Company' }}</p>
+        </div>
+
+        <span class="status-badge" [ngClass]="getStatusClass(app.status)">
+          {{ app.status || 'Pending' }}
+        </span>
+      </div>
+
+      <div class="meta">
+        <p><strong>Student:</strong> {{ app.student }}</p>
+        <p><strong>Applied:</strong> {{ app.applied_at | date:'medium' }}</p>
+      </div>
+
+      <div class="cover-letter">
+        <strong>Cover Letter:</strong>
+        <p>{{ app.cover_letter }}</p>
+      </div>
+
+      <button class="delete-btn" (click)="deleteApplication(app.id)">
+        Delete
+      </button>
+    </div>
+  </div>
+</section>

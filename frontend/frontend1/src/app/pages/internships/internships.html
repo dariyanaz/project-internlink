@@ -1,0 +1,63 @@
+<app-navbar></app-navbar>
+
+<section class="hero">
+  <div class="hero-badge">🚀 Find your future internship today</div>
+  <h1>Bright opportunities for <span>students</span></h1>
+  <p>
+    Explore internships from real companies and connect your Angular frontend
+    directly to your Django backend.
+  </p>
+
+  <div class="search-box">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      placeholder="Search by role, company, city..."
+    />
+    <button (click)="onSearch()">Search</button>
+  </div>
+</section>
+
+<section class="internships-section">
+  <div class="section-header">
+    <h2>Latest Internships</h2>
+    <button class="refresh-btn" (click)="loadInternships()">Refresh</button>
+  </div>
+
+  <div *ngIf="loading" class="state-card">Loading internships...</div>
+  <div *ngIf="error" class="state-card error">{{ error }}</div>
+
+  <div *ngIf="!loading && !error && filteredInternships.length === 0" class="state-card">
+    No internships found.
+  </div>
+
+  <div class="cards-grid" *ngIf="!loading && !error && filteredInternships.length > 0">
+    <div class="internship-card" *ngFor="let internship of filteredInternships">
+      <div class="card-top">
+        <div class="logo-circle">
+          {{ getCompanyLogo(internship) }}
+        </div>
+
+        <div>
+          <h3>{{ internship.title }}</h3>
+          <p class="company">{{ getCompanyName(internship) }}</p>
+        </div>
+      </div>
+
+      <p class="description">
+        {{ internship.description }}
+      </p>
+
+      <div class="tags">
+        <span>{{ internship.location || 'Location not specified' }}</span>
+        <span>{{ internship.work_type || 'Internship' }}</span>
+        <span *ngIf="internship.salary">₸{{ internship.salary }}</span>
+      </div>
+
+      <div class="card-bottom">
+        <small>{{ getPostedDate(internship.posted_at) }}</small>
+        <button (click)="viewDetails(internship.id)">View Details</button>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,165 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at left top, rgba(79, 172, 254, 0.18), transparent 20%),
+    radial-gradient(circle at right top, rgba(255, 78, 205, 0.15), transparent 22%),
+    linear-gradient(180deg, #0a1022 0%, #121a35 100%);
+  color: white;
+}
+
+.detail-page {
+  max-width: 950px;
+  margin: 0 auto;
+  padding: 40px 24px 70px;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #ffb347;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.detail-card {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 24px;
+  padding: 28px;
+  backdrop-filter: blur(12px);
+}
+
+.detail-card.error {
+  color: #ffb3c1;
+}
+
+.company-name {
+  color: #ff8a00;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.detail-card h1 {
+  margin: 0 0 18px;
+  font-size: clamp(30px, 5vw, 52px);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.chips span {
+  background: rgba(255,255,255,0.1);
+  padding: 8px 12px;
+  border-radius: 999px;
+}
+
+.block {
+  margin-bottom: 24px;
+}
+
+.block h3 {
+  margin-bottom: 10px;
+  color: #8fd3ff;
+}
+
+.block p {
+  line-height: 1.7;
+  color: #e8ecff;
+}
+
+.apply-btn {
+  border: none;
+  border-radius: 14px;
+  padding: 15px 24px;
+  background: linear-gradient(135deg, #ff8a00, #ff4ecd);
+  color: white;
+  font-weight: 800;
+  cursor: pointer;
+}
+.apply-box {
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.apply-box h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: #ffcf8a;
+}
+
+.apply-box textarea {
+  width: 100%;
+  min-height: 120px;
+  border: none;
+  outline: none;
+  resize: vertical;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  margin-bottom: 12px;
+  box-sizing: border-box;
+}
+
+.apply-box textarea::placeholder {
+  color: #cfd7ff;
+}
+
+.success-message {
+  color: #8ff7b8;
+  margin-bottom: 12px;
+}
+
+.error-message {
+  color: #ffb3c1;
+  margin-bottom: 12px;
+}
+.apply-box {
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.apply-box h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: #ffcf8a;
+}
+
+.apply-box textarea {
+  width: 100%;
+  min-height: 120px;
+  border: none;
+  outline: none;
+  resize: vertical;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  margin-bottom: 12px;
+  box-sizing: border-box;
+}
+
+.apply-box textarea::placeholder {
+  color: #cfd7ff;
+}
+
+.success-message {
+  color: #8ff7b8;
+  margin-bottom: 12px;
+}
+
+.error-message {
+  color: #ffb3c1;
+  margin-bottom: 12px;
+}

@@ -1,0 +1,19 @@
+<nav class="navbar">
+  <a routerLink="/" class="logo">Intern<span>Link</span></a>
+
+  <div class="nav-links">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      Internships
+    </a>
+
+    <a *ngIf="isLoggedIn" routerLink="/applications" routerLinkActive="active">
+      My Applications
+    </a>
+
+    <a *ngIf="!isLoggedIn" routerLink="/login">Login</a>
+    <a *ngIf="!isLoggedIn" routerLink="/register">Register</a>
+
+    <span *ngIf="isLoggedIn" class="username-chip">Hi, {{ username }}</span>
+    <button *ngIf="isLoggedIn" class="logout-btn" (click)="logout()">Logout</button>
+  </div>
+</nav>

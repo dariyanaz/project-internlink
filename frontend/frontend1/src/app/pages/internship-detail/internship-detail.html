@@ -1,0 +1,51 @@
+<app-navbar></app-navbar>
+
+<section class="detail-page">
+  <a routerLink="/" class="back-link">← Back to internships</a>
+
+  <div *ngIf="loading" class="detail-card">
+    Loading internship details...
+  </div>
+
+  <div *ngIf="!loading && error" class="detail-card error">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!loading && internship" class="detail-card">
+    <p class="company-name">{{ getCompanyName() }}</p>
+    <h1>{{ internship.title }}</h1>
+
+    <div class="chips">
+      <span>{{ internship.location || 'Location not specified' }}</span>
+      <span>{{ internship.work_type || 'Internship' }}</span>
+      <span *ngIf="internship.salary">{{ internship.salary }}</span>
+      <span *ngIf="internship.duration">{{ internship.duration }}</span>
+    </div>
+
+    <div class="block">
+      <h3>Description</h3>
+      <p>{{ internship.description }}</p>
+    </div>
+
+    <div class="block" *ngIf="internship.deadline">
+      <h3>Deadline</h3>
+      <p>{{ internship.deadline }}</p>
+    </div>
+
+    <div class="apply-box">
+      <h3>Apply Now</h3>
+
+      <textarea
+        [(ngModel)]="coverLetter"
+        placeholder="Write a short cover letter..."
+      ></textarea>
+
+      <p class="success-message" *ngIf="applySuccess">{{ applySuccess }}</p>
+      <p class="error-message" *ngIf="applyError">{{ applyError }}</p>
+
+      <button class="apply-btn" (click)="applyNow()" [disabled]="applyLoading">
+        {{ applyLoading ? 'Submitting...' : 'Apply Now' }}
+      </button>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,226 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(108, 99, 255, 0.18), transparent 25%),
+    radial-gradient(circle at top right, rgba(255, 78, 205, 0.16), transparent 25%),
+    linear-gradient(180deg, #0a1022 0%, #121a35 100%);
+  color: white;
+}
+
+.hero {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 24px 30px;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(255, 138, 0, 0.18);
+  color: #ffb347;
+  border: 1px solid rgba(255, 179, 71, 0.35);
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-size: clamp(36px, 6vw, 68px);
+  line-height: 1.05;
+  margin: 0 0 14px;
+  font-weight: 800;
+}
+
+.hero h1 span {
+  background: linear-gradient(135deg, #ff8a00, #ff4ecd, #6c63ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+  max-width: 760px;
+  color: #d6ddff;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.search-box {
+  margin-top: 28px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.search-box input {
+  flex: 1;
+  min-width: 260px;
+  padding: 16px 18px;
+  border: none;
+  outline: none;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.09);
+  color: white;
+  font-size: 15px;
+}
+
+.search-box input::placeholder {
+  color: #c8d1ff;
+}
+
+.search-box button,
+.refresh-btn,
+.card-bottom button {
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  transition: 0.25s ease;
+}
+
+.search-box button,
+.refresh-btn {
+  padding: 14px 22px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #ff8a00, #ff4ecd);
+  color: white;
+}
+
+.search-box button:hover,
+.refresh-btn:hover,
+.card-bottom button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(255, 78, 205, 0.25);
+}
+
+.internships-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 24px 60px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.section-header h2 {
+  font-size: 30px;
+  margin: 0;
+}
+
+.state-card {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 22px;
+  color: #e8ecff;
+}
+
+.state-card.error {
+  border-color: rgba(255, 99, 132, 0.4);
+  color: #ffb3c1;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 22px;
+}
+
+.internship-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.11), rgba(255,255,255,0.07));
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 24px;
+  padding: 22px;
+  backdrop-filter: blur(10px);
+  transition: 0.3s ease;
+}
+
+.internship-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 138, 0, 0.35);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.22);
+}
+
+.card-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.logo-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #6c63ff, #ff4ecd);
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.card-top h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.company {
+  margin: 6px 0 0;
+  color: #cfd7ff;
+}
+
+.description {
+  margin: 18px 0;
+  color: #e6ebff;
+  line-height: 1.6;
+  min-height: 72px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tags span {
+  background: rgba(255, 255, 255, 0.09);
+  color: #f5f7ff;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+}
+
+.card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 22px;
+  gap: 10px;
+}
+
+.card-bottom small {
+  color: #cfd7ff;
+}
+
+.card-bottom button {
+  padding: 11px 16px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #6c63ff, #4facfe);
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .card-bottom {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .card-bottom button {
+    width: 100%;
+  }
+}

@@ -1,0 +1,59 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(14px);
+  background: rgba(13, 17, 35, 0.82);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.logo {
+  text-decoration: none;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+}
+
+.logo span {
+  color: #ff8a00;
+}
+
+.nav-links {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.nav-links a,
+.logout-btn {
+  text-decoration: none;
+  color: #d3dcff;
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 12px;
+  transition: 0.25s ease;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.nav-links a:hover,
+.nav-links a.active,
+.logout-btn:hover {
+  background: linear-gradient(135deg, #6c63ff, #ff4ecd);
+  color: white;
+}
+
+.username-chip {
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffcf8a;
+  font-weight: 700;
+}
