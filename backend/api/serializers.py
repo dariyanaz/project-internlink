@@ -4,16 +4,30 @@ from .models import Company, Internship, Application, Review
 
 
 class RegisterSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only=True)
+    first_name = serializers.CharField(required=False, allow_blank=True)
+    last_name = serializers.CharField(required=False, allow_blank=True)
+    password2 = serializers.CharField(write_only=True)
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'password']
+        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'password', 'password2']
+        extra_kwargs = {
+            'password': {'write_only': True}
+        }
+
+    def validate(self, attrs):
+        if attrs['password'] != attrs['password2']:
+            raise serializers.ValidationError({'password': ['Passwords do not match.']})
+        return attrs
 
     def create(self, validated_data):
+        validated_data.pop('password2')
+
         user = User.objects.create_user(
             username=validated_data['username'],
             email=validated_data.get('email', ''),
+            first_name=validated_data.get('first_name', ''),
+            last_name=validated_data.get('last_name', ''),
             password=validated_data['password']
         )
         return user
@@ -100,6 +114,23 @@ class ApplicationSerializer(serializers.ModelSerializer):
             'applied_at',
         ]
         read_only_fields = ['student', 'status', 'applied_at']
+
+    def validate(self, attrs):
+        request = self.context.get('request')
+        internship = attrs.get('internship')
+
+        if request and request.user and internship:
+            already_applied = Application.objects.filter(
+                student=request.user,
+                internship=internship
+            ).exists()
+
+            if already_applied:
+                raise serializers.ValidationError({
+                    'internship': ['You have already applied to this internship.']
+                })
+
+        return attrs
 
     def create(self, validated_data):
         request = self.context.get('request')

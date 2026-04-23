@@ -12,8 +12,8 @@ from .views import (
 )
 
 urlpatterns = [
-    path('register/', register_view, name='register'),
-    path('login/', login_view, name='login'),
+    path('auth/register/', register_view, name='register'),
+    path('auth/login/', login_view, name='login'),
 
     path('companies/', CompanyListCreateView.as_view(), name='company-list'),
     path('companies/<int:pk>/', CompanyDetailView.as_view(), name='company-detail'),

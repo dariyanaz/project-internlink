@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
 from rest_framework import generics, status, permissions
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
@@ -23,11 +23,9 @@ def register_view(request):
         token, _ = Token.objects.get_or_create(user=user)
         return Response({
             'token': token.key,
-            'user': {
-                'id': user.id,
-                'username': user.username,
-                'email': user.email
-            }
+            'user_id': user.id,
+            'username': user.username,
+            'email': user.email
         }, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -40,21 +38,15 @@ def login_view(request):
 
     if not username or not password:
         return Response(
-            {'error': 'Username and password are required'},
+            {'detail': 'Username and password are required.'},
             status=status.HTTP_400_BAD_REQUEST
         )
 
-    try:
-        user = User.objects.get(username=username)
-    except User.DoesNotExist:
-        return Response(
-            {'error': 'Invalid credentials'},
-            status=status.HTTP_400_BAD_REQUEST
-        )
+    user = authenticate(username=username, password=password)
 
-    if not user.check_password(password):
+    if user is None:
         return Response(
-            {'error': 'Invalid credentials'},
+            {'detail': 'Invalid credentials.'},
             status=status.HTTP_400_BAD_REQUEST
         )
 
@@ -62,11 +54,9 @@ def login_view(request):
 
     return Response({
         'token': token.key,
-        'user': {
-            'id': user.id,
-            'username': user.username,
-            'email': user.email
-        }
+        'user_id': user.id,
+        'username': user.username,
+        'email': user.email
     })
 
 
@@ -113,9 +103,11 @@ class ApplicationListCreateView(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        return Application.objects.select_related('internship', 'internship__company', 'student').filter(
-            student=self.request.user
-        ).order_by('-applied_at')
+        return Application.objects.select_related(
+            'internship',
+            'internship__company',
+            'student'
+        ).filter(student=self.request.user).order_by('-applied_at')
 
     def get_serializer_context(self):
         return {'request': self.request}
@@ -126,9 +118,11 @@ class ApplicationDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        return Application.objects.select_related('internship', 'internship__company', 'student').filter(
-            student=self.request.user
-        )
+        return Application.objects.select_related(
+            'internship',
+            'internship__company',
+            'student'
+        ).filter(student=self.request.user)
 
     def get_serializer_context(self):
         return {'request': self.request}
@@ -144,9 +138,10 @@ class ReviewListCreateView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         internship_id = self.kwargs.get('internship_id')
-        return Review.objects.select_related('internship', 'student').filter(
-            internship_id=internship_id
-        ).order_by('-created_at')
+        return Review.objects.select_related(
+            'internship',
+            'student'
+        ).filter(internship_id=internship_id).order_by('-created_at')
 
     def get_serializer_context(self):
         return {'request': self.request}
