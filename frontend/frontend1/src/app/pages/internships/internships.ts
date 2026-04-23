@@ -27,23 +27,29 @@ export class InternshipsComponent implements OnInit {
     this.loadInternships();
   }
 
-  loadInternships(): void {
-    this.loading = true;
-    this.error = '';
+loadInternships(): void {
+  console.log('LOAD INTERNSHIPS START');
+  this.loading = true;
+  this.error = '';
 
-    this.internshipService.getInternships().subscribe({
-      next: (data) => {
-        this.internships = data;
-        this.filteredInternships = data;
-        this.loading = false;
-      },
-      error: (err) => {
-        console.error('Error loading internships:', err);
-        this.error = 'Failed to load internships from backend.';
-        this.loading = false;
-      }
-    });
-  }
+  this.internshipService.getInternships().subscribe({
+    next: (data) => {
+      console.log('INTERNSHIPS DATA:', data);
+      this.internships = data;
+      this.filteredInternships = data;
+      this.loading = false;
+    },
+    error: (err) => {
+      console.log('INTERNSHIPS ERROR:', err);
+      console.log('INTERNSHIPS ERROR BODY:', err?.error);
+      this.error = 'Failed to load internships from backend.';
+      this.loading = false;
+    },
+    complete: () => {
+      console.log('LOAD INTERNSHIPS COMPLETE');
+    }
+  });
+}
 
   onSearch(): void {
     const term = this.searchTerm.trim().toLowerCase();
@@ -70,16 +76,24 @@ export class InternshipsComponent implements OnInit {
     this.router.navigate(['/internships', id]);
   }
 
-  getCompanyName(internship: Internship): string {
-    return typeof internship.company === 'object'
-      ? internship.company.name
-      : 'Company';
+getCompanyName(internship: Internship): string {
+  if (!internship.company) return 'Company';
+
+  if (typeof internship.company === 'string') {
+    return internship.company;
   }
 
-  getCompanyLogo(internship: Internship): string {
-    const companyName = this.getCompanyName(internship);
-    return companyName ? companyName.charAt(0).toUpperCase() : 'I';
+  if (typeof internship.company === 'object' && internship.company !== null && 'name' in internship.company) {
+    return String(internship.company.name);
   }
+
+  return 'Company';
+}
+
+getCompanyLogo(internship: Internship): string {
+  const name = this.getCompanyName(internship);
+  return name ? name.charAt(0).toUpperCase() : 'I';
+}
 
   getPostedDate(date?: string): string {
     if (!date) return 'Recently posted';
